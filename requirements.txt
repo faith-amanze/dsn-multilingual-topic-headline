@@ -1,0 +1,9 @@
+# Versions were not recorded in the notebook. To pin them, run in the Kaggle notebook:
+#   pip freeze | grep -iE "^(transformers|torch|bert-score|sentencepiece|scikit-learn|pandas|numpy)=="
+transformers
+torch
+bert-score
+sentencepiece
+scikit-learn
+pandas
+numpy

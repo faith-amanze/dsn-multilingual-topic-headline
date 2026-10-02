@@ -1,0 +1,6 @@
+split,baseline_macro_f1,baseline_gen_score,baseline_final,finetuned_macro_f1,finetuned_gen_score,finetuned_final
+ALL,0.0485,0.4555,0.2520,0.8709,0.5129,0.6919
+hau,0.0332,0.4810,0.2571,0.8849,0.5484,0.7167
+ibo,0.0561,0.4507,0.2534,0.8354,0.5049,0.6701
+pcm,0.0902,0.4912,0.2907,0.9582,0.5127,0.7355
+yor,0.0815,0.3944,0.2379,0.8967,0.4658,0.6812
