@@ -71,7 +71,7 @@ submission.csv   final competition predictions (1,743 test rows x 2 = 3,486 pred
 
 ## Model weights
 
-The checkpoint is about 2.3 GB, so it is not committed. Host it on the Hugging Face Hub and link it here: TODO.
+The checkpoint is about 2.3 GB, so it is not committed. It is hosted on the Hugging Face Hub: https://huggingface.co/faith-amanze/mt5-base-nigerian-topic-headline
 
 ## Author
 
