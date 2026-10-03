@@ -45,6 +45,7 @@ Dev Final by epoch: 0.646, 0.669, 0.676, 0.678, 0.662, 0.690, 0.688, 0.693. Trai
 - **Topic classification is the easier task.** MacroF1 rose from 0.05 to 0.87, while GenScore only moved from 0.46 to 0.51.
 - **Headline quality has a low ceiling.** Reference headlines barely overlap with their source articles (mean ROUGE-L 0.062), so they are paraphrased rather than extracted. That limits what ROUGE-based scoring can reward.
 - **Pidgin scores highest on topic (0.958 MacroF1); Igbo scores lowest (0.835).** Yoruba has the weakest headline score (0.466). Reasons are untested; plausible candidates are tokenizer coverage, training-set size (Hausa has the most data, Pidgin the least) and Pidgin's similarity to English.
+- **Headlines are capped at 40 tokens**, so many predictions end mid-sentence.
 - **Caveat:** the best checkpoint was chosen on the same dev set used for reporting, so the dev numbers are slightly optimistic.
 
 ## Gotchas
@@ -65,7 +66,7 @@ Dev Final by epoch: 0.646, 0.669, 0.676, 0.678, 0.662, 0.690, 0.688, 0.693. Trai
 ```
 notebooks/   Kaggle notebook (.ipynb)
 results/     baseline vs fine-tuned, per-language, per-epoch dev scores
-submission.csv   add from Kaggle output
+submission.csv   final competition predictions (1,743 test rows x 2 = 3,486 predictions)
 ```
 
 ## Model weights
