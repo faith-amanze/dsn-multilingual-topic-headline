@@ -48,6 +48,21 @@ Dev Final by epoch: 0.646, 0.669, 0.676, 0.678, 0.662, 0.690, 0.688, 0.693. Trai
 - **Headlines are capped at 32 generated tokens**, so many predictions end mid-sentence.
 - **Caveat:** the best checkpoint was chosen on the same dev set used for reporting, so the dev numbers are slightly optimistic.
 
+## Examples (dev set)
+
+| Lang | Article (truncated) | Gold topic | Pred topic | Gold headline | Pred headline |
+|---|---|---|---|---|---|
+| Hausa | Barcelona za ta koma buga wasanninta na gida a Olympic Stadium a 2023-24... | sports | sports | Barcelona za ta koma buga wasa a Olympic Stadium daga 2023-24 | Barcelona za ta koma buga wasannin gida a 2024-25 |
+| Hausa | Latsa alamar lasifikar da ke sama domin sauraren Bayanin Dahiru Bauchi kan rokon Ganduje... | politics | religion | Sheikh Dahiru Bauchi ya gargadi Ganduje kan sabbin masarautu | Bidiyon hirar da Sheikh Dahiru Bauchi kan hadisin Ganduje ya janye sabbin masarautu |
+| Igbo | Ọ bụrụ na a jụọ ụfọdụ ndị ntorobịa taa onye tiri egwu a kpọrọ "Tetanụ n'ụra"... | entertainment | entertainment | Christy Essien-Igbokwe: Nwaanyị a lụtara na mba bịara bụrụ Ada Igbo ji eme ọnụ | 'Tetanụ n'ụra' - Christy Essie-Igbokwe |
+| Igbo | Lai Mohammed bụ minista mgbasaozi Naịjirịa suru akara akụkọ ụgha... | politics | business | Lai Mohammed ọ rịorọ Obi Cubana ego maka ịkwụ ụgwọ Naịjirịa ji? Lee ihe anyị ma | Cubana: Lai Mohammed rịọrọ Obi Cubana bụ onye azụmahịa na-ewu kamgbe mwụcha izu ụk *(cut off at 32 tokens)* |
+| Pidgin | As Nigeria draw Egypt, Guinea Bissau and Sudan for Afcon... | sports | sports | Afcon 2021 draw: Nigeria vs Egypt go open Group D, five oda times di two teams don meet | Nigeria vs Egypt: Prediction, time & how to watch di Afcon qualifier |
+| Pidgin | Game of Thrones actor, Hafthor Bjornsson don set world deadlifting record... | sports | entertainment | Hafthor Bjornsson: Game of Thrones actor breaks world deadlifting record | Bjornson set world deadweight record as im lift 1000kg |
+| Yoruba | Arun Coronavirus ti tan de, o kere tan, ọgọrin orilẹ-ede... | health | health | Coronavirus symptoms: Kí ni àwọn àpẹẹrẹ àrùn yìí, àti pé báwo ni mo ṣe leè dáàbò bo ara mi? | Coronavirus tips: Wo àwọn ohun tó yẹ kí o mọ̀ nípa àrùn Coronavirus |
+| Yoruba | Ajọ to n ja fun ẹtọ ọmọniyan nidi ọrọ aje ati ijiyin isẹ iriju ẹni, SERAP... | politics | health | Muhammadu Buhari: Ọ̀pọ̀ ọmọ Naijiria ló ń jìyà nítorí ìwà àjẹbánu tó wà ní ẹ̀ka ètò ìlera - SERAP | SERAP: Aàrẹ Buhari lẹ́jọ́ lórí ikuna rẹ̀ láti ṣe ìwàdìí bíl *(cut off at 32 tokens)* |
+
+Errors cluster around adjacent categories — politics confused with religion, business, or health — rather than unrelated ones. Two headlines above are visibly truncated by the 32-token generation cap (see Limitations).
+
 ## Gotchas
 
 - **Data schema differs from the brief.** `train.csv` columns are `category, headline, text, url, id, split, lang`; `test.csv` has `id, lang, text`. The notebook renames them to `label` and `language`.
@@ -62,17 +77,3 @@ Dev Final by epoch: 0.646, 0.669, 0.676, 0.678, 0.662, 0.690, 0.688, 0.693. Trai
 3. Output: `submission.csv` (two rows per test id: `<id>_topic` and `<id>_headline`) and the best checkpoint in `/kaggle/working/mt5_best`.
 
 ## Files
-
-```
-notebooks/   Kaggle notebook (.ipynb)
-results/     baseline vs fine-tuned, per-language, per-epoch dev scores
-submission.csv   final competition predictions (1,743 test rows x 2 = 3,486 predictions)
-```
-
-## Model weights
-
-The checkpoint is about 2.3 GB, so it is not committed. It is hosted on the Hugging Face Hub: https://huggingface.co/faith-amanze/mt5-base-nigerian-topic-headline
-
-## Author
-
-Faith. Built during the DSN Bootcamp, LLM track.
