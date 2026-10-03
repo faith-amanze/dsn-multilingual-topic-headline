@@ -1,8 +1,34 @@
 # Multilingual Topic Classification & Headline Generation for Nigerian Languages
 
-One **mT5-base** model, fine-tuned for two tasks at once (topic classification and headline generation) on news text in **Hausa, Igbo, Yoruba and Nigerian Pidgin**. Built for the DSN Bootcamp Hackathon 2026 (LLM/Agent Track) on Kaggle.
+A multilingual, multi-task NLP system for Nigerian news: one **mT5-base** model jointly performs topic classification and headline generation across **Hausa, Igbo, Yoruba and Nigerian Pidgin**.
+
+*Developed for the DSN Bootcamp Hackathon 2026 (LLM/Agent Track) on Kaggle.*
 
 Kaggle notebook: https://www.kaggle.com/code/faithamanze/nigerian-languages-topic-headline-mt5-base
+
+## How it works
+
+              Nigerian-language news article
+                          │
+            ┌─────────────┴─────────────┐
+            │                           │
+     "topic {lang}: ..."        "headline {lang}: ..."
+            │                           │
+            └─────────────┬─────────────┘
+                          ↓
+                     mT5-base
+                 (one shared model)
+                          │
+            ┌─────────────┴─────────────┐
+            ↓                           ↓
+     Topic (1 of 7 labels)      Headline (generated text)
+     business · health ·        ≤32 tokens, beam search,
+     politics · religion ·      never blank
+     sports · entertainment ·
+     technology
+
+
+Both tasks share the same model and weights — the only difference is the prompt prefix (`topic` vs `headline`) and the generation settings used at inference time.
 
 ## Task and metric
 
@@ -76,4 +102,19 @@ Errors cluster around adjacent categories — politics confused with religion, b
 2. Run all cells. Training takes about 4 hours on a T4.
 3. Output: `submission.csv` (two rows per test id: `<id>_topic` and `<id>_headline`) and the best checkpoint in `/kaggle/working/mt5_best`.
 
+
 ## Files
+
+​```
+notebooks/   Kaggle notebook (.ipynb)
+results/     baseline vs fine-tuned, per-language, per-epoch dev scores
+submission.csv   final competition predictions (1,743 test rows x 2 = 3,486 predictions)
+​```
+
+## Model weights
+
+The checkpoint is about 2.3 GB, so it is not committed. It is hosted on the Hugging Face Hub: https://huggingface.co/faith-amanze/mt5-base-nigerian-topic-headline
+
+## Author
+
+Faith. Built during the DSN Bootcamp, LLM track.
