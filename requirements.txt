@@ -1,9 +1,9 @@
-# Versions were not recorded in the notebook. To pin them, run in the Kaggle notebook:
-#   pip freeze | grep -iE "^(transformers|torch|bert-score|sentencepiece|scikit-learn|pandas|numpy)=="
-transformers
-torch
-bert-score
-sentencepiece
-scikit-learn
-pandas
-numpy
+# Versions from the Kaggle environment used for training and inference (Python 3.13).
+# bert-score and torch were read from a fresh session on the same image.
+transformers==5.16.1
+torch==2.11.0
+bert-score==0.3.12
+sentencepiece==0.2.2
+scikit-learn==1.6.1
+pandas==2.3.3
+numpy==2.1.3
